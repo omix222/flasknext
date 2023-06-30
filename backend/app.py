@@ -18,7 +18,7 @@ class Item(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f'<Item {self.name}>'
+        return f'{self.id}:{self.name}'
 
 with app.app_context():
     db.create_all()
