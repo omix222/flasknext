@@ -18,7 +18,7 @@ class Item(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f'{self.id}:{self.name}'
+        return f'id:{self.id} name:{self.name}'
 
 with app.app_context():
     db.create_all()
@@ -26,7 +26,7 @@ with app.app_context():
 
 @app.route('/')
 def hello():
-    return "Hello from Flask!"
+    return "Hello from Flask!!!"
 
 @app.route('/items', methods=['GET'])
 def get_items():
