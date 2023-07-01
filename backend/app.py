@@ -18,7 +18,8 @@ class Item(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f'id:{self.id},name:{self.name}'
+        return f'{{"id": {self.id}, "name": "{self.name}"}}'  # JSON形式の文字列を返す
+
 
 with app.app_context():
     db.create_all()
@@ -31,7 +32,7 @@ def hello():
 @app.route('/items', methods=['GET'])
 def get_items():
     items = Item.query.all()
-    return jsonify([str(item) for item in items])
+    return jsonify([item.__repr__() for item in items]) 
 
 @app.route('/items', methods=['POST'])
 def add_item():
@@ -39,7 +40,7 @@ def add_item():
     item = Item(name=name)
     db.session.add(item)
     db.session.commit()
-    return jsonify(str(item)), 201
+    return jsonify(item), 201
 
 if __name__ == '__main__':
     app.run(debug=True)

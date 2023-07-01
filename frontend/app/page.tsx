@@ -23,9 +23,7 @@ export default function Home() {
       },
       body: JSON.stringify({ name: newItem }),
     });
-    const data = await res.json();
-    setItems([...items, data]);
-    setNewItem('');
+    fetchItems();
   };
 
   return (
